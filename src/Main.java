@@ -1,3 +1,4 @@
+import Students.ClassContainer;
 import Students.Classes;
 import Students.Student;
 import Students.StudentCondition;
@@ -24,6 +25,17 @@ public class Main {
         System.out.println(firstClass.sortByName());
         System.out.println(firstClass.sortByPoints());
         System.out.println(firstClass.findStudentWithBiggestAmountOfPoints());
+
+        ClassContainer container = new ClassContainer();
+        container.addClass("SecondClass",10);
+        Classes classes = container.classesMap.get("SecondClass");
+        classes.addStudent(new Student("Daniel","Kubik", StudentCondition.ABSENT,1995, 25));
+        classes.addStudent(new Student("Saniel","Aubik", StudentCondition.ABSENT,1995, 25));
+        container.summary();
+
+        container.addClass("ThirdClass", 10);
+        classes = container.classesMap.get("ThirdClass");
+        System.out.println(container.findEmpty());
 
     }
 }

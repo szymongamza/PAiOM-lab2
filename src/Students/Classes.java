@@ -3,17 +3,25 @@ package Students;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class Classes {
-    private String name;
-    private List<Student> studentList = new ArrayList();
-    private int maxNumberOfStudents;
+    private final String name;
+    private final List<Student> studentList = new ArrayList();
+    private final int maxNumberOfStudents;
+
+    public String getName() {
+        return name;
+    }
+
+    public int getMaxNumberOfStudents() {
+        return maxNumberOfStudents;
+    }
 
     public Classes(String name, int maxNumberOfStudents) {
         this.name = name;
         this.maxNumberOfStudents = maxNumberOfStudents;
+
     }
 
     public void addStudent(Student student){
@@ -55,7 +63,7 @@ public class Classes {
         student.setPoints(tempPoints);
     }
     public Student search(String surname){
-        int result = 1;
+        int result;
         for (Student x:studentList) {
             result = surname.compareTo(x.getSurname());
             if(result == 0){
@@ -71,7 +79,7 @@ public class Classes {
             for (Student x:studentList) {
                 resultSurname = x.getSurname().contains(arg);
                 resultName= x.getName().contains(arg);
-                if(resultSurname == true || resultName == true){
+                if(resultSurname || resultName ){
                     tempList.add(x);
                 }
             }
@@ -82,7 +90,7 @@ public class Classes {
         int count=0;
         for (Student x:studentList) {
             result = x.getStudentCondition().equals(studentCondition);
-            if(result == true){
+            if(result){
                 count++;
             }
         }
@@ -100,7 +108,7 @@ public class Classes {
     }
     public List<Student> sortByPoints(){
         List<Student> tempList = studentList;
-        Collections.sort(studentList, new PointsComparator().reversed());
+        Collections.sort(tempList, new PointsComparator().reversed());
         return tempList;
     }
     public Student findStudentWithBiggestAmountOfPoints(){
@@ -109,5 +117,16 @@ public class Classes {
         return o;
     }
 
+    public int getActualSize(){
+        return studentList.size();
+    }
 
+    @Override
+    public String toString() {
+        return "Classes{" +
+                "name='" + name + '\'' +
+                ", studentList=" + studentList +
+                ", maxNumberOfStudents=" + maxNumberOfStudents +
+                '}';
+    }
 }
